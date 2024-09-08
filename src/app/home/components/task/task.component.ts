@@ -20,6 +20,7 @@ export class TaskComponent implements OnInit {
   @ViewChild('dtTasks') table!: TableLazyLoadEvent;
   tasks: Task[] = [];
   users: User[] = [];
+  userExist: boolean = false;
   user: any = {};
   public filterForm: any;
   totalRecords: number = 0;
@@ -109,6 +110,9 @@ export class TaskComponent implements OnInit {
 
   getUsers() {
     this.userService.gerUsers().subscribe(data => {
+      if (data.data.length === 0) {
+        this.userExist = true;
+      }
       this.users = data.data;
     });
   }
@@ -131,7 +135,7 @@ export class TaskComponent implements OnInit {
           summary: 'Success',
           detail: 'Tarea eliminada correctamente.'
         });
-        this.getTasks(); 
+        this.getTasks();
       },
       error: () => {
         this.messageService.add({
@@ -216,7 +220,7 @@ export class TaskComponent implements OnInit {
           summary: 'Success',
           detail: 'Se cambió el estado correctamente'
         });
-        this.getTasks(); 
+        this.getTasks();
       },
       error: () => {
         this.messageService.add({
