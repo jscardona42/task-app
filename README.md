@@ -10,12 +10,12 @@
 
 1. Clona el repositorio (si aún no lo has hecho):
    ```
-   git clone [URL_DEL_REPOSITORIO]
+   git clone https://github.com/jscardona42/task-app
    ```
 
 2. Navega al directorio del proyecto frontend:
    ```
-   cd [NOMBRE_DEL_DIRECTORIO_FRONTEND]
+   cd task-app
    ```
 
 3. Instala las dependencias:
