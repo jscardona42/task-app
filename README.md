@@ -1,27 +1,92 @@
-# TaskApp
+# Frontend (Angular)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.15.
+## Requisitos previos
 
-## Development server
+- Node.js 18 o superior
+- npm 6.x o superior
+- Angular CLI 15 o superior
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Instalación
 
-## Code scaffolding
+1. Clona el repositorio (si aún no lo has hecho):
+   ```
+   git clone https://github.com/jscardona42/task-app.git
+   ```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+2. Navega al directorio del proyecto frontend:
+   ```
+   cd task-app
+   ```
 
-## Build
+3. Instala las dependencias:
+   ```
+   npm install
+   ```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Ejecución
 
-## Running unit tests
+Para iniciar el servidor de desarrollo, ejecuta:
+```
+ng serve
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+El servidor de desarrollo estará disponible en `http://localhost:4200`.
 
-## Running end-to-end tests
+Para abrir automáticamente el navegador al iniciar, usa:
+```
+ng serve --open
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Compilación para producción
 
-## Further help
+Para construir el proyecto para producción, ejecuta:
+```
+ng build --prod
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Los archivos compilados se generarán en el directorio `dist/`.
+
+## Estructura del proyecto
+
+- `src/app/` - Componentes, servicios y módulos de la aplicación
+- `src/assets/` - Imágenes, fuentes y otros recursos estáticos
+- `src/environments/` - Archivos de configuración de entorno
+- `src/styles.css` - Estilos globales
+
+## Comandos útiles
+
+- `ng generate component component-name` - Genera un nuevo componente
+- `ng generate service service-name` - Genera un nuevo servicio
+- `ng test` - Ejecuta las pruebas unitarias
+- `ng e2e` - Ejecuta las pruebas end-to-end
+
+## Solución de problemas comunes
+
+1. Si encuentras errores de dependencias, intenta borrar `node_modules` y `package-lock.json`, luego ejecuta `npm install` nuevamente.
+
+2. Para problemas de compilación, asegúrate de que tu versión de Node.js sea compatible con la versión de Angular que estás usando.
+
+3. Si tienes problemas con CORS al conectar con el backend, verifica la configuración de CORS en tu servidor backend.
+
+## Mejores prácticas
+
+- Utiliza la arquitectura de componentes de Angular para una mejor organización del código.
+- Implementa lazy loading para módulos grandes para mejorar el rendimiento.
+- Utiliza servicios para la lógica de negocio y las llamadas a API.
+- Sigue las guías de estilo de Angular para mantener un código consistente.
+
+## Contribuir
+
+Si deseas contribuir al proyecto, por favor sigue estas pautas:
+1. Haz un fork del repositorio
+2. Crea una nueva rama para tu feature
+3. Haz tus cambios y commitea
+4. Envía un pull request
+
+¡Gracias por contribuir!
+
+## Soporte
+
+Si encuentras algún problema o tienes alguna pregunta, por favor abre un issue en el repositorio de GitHub.
+
+¡Listo! Tu aplicación Angular está configurada y en funcionamiento.
