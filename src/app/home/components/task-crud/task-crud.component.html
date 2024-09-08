@@ -1,0 +1,106 @@
+<form [formGroup]="taskForm" class="p-fluid">
+  <div class="p-field mt-4">
+    <span class="p-float-label">
+      <input id="title" type="text" pInputText formControlName="title" />
+      <label for="title">Título</label>
+    </span>
+    <small
+      *ngIf="
+        taskForm.get('title')?.invalid &&
+        (taskForm.get('title')?.dirty || taskForm.get('title')?.touched)
+      "
+      class="p-error"
+    >
+      El título es requerido.
+    </small>
+  </div>
+
+  <div class="p-field mt-4">
+    <span class="p-float-label">
+      <input
+        id="description"
+        type="text"
+        pInputText
+        formControlName="description"
+        class="p-textarea"
+      />
+      <label for="description">Descripción</label>
+    </span>
+    <small
+      *ngIf="
+        taskForm.get('description')?.invalid &&
+        (taskForm.get('description')?.dirty ||
+          taskForm.get('description')?.touched)
+      "
+      class="p-error"
+    >
+      La descripción es requerida.
+    </small>
+  </div>
+
+  <div class="p-field mt-4">
+    <span class="p-float-label">
+      <p-calendar
+        id="expiration_date"
+        formControlName="expiration_date"
+        [showIcon]="true"
+        dateFormat="dd/mm/yy"
+        [disabledDates]="disabledDates"
+      ></p-calendar>
+      <label for="expiration_date">Fecha de Vencimiento</label>
+    </span>
+    <small
+      *ngIf="
+        taskForm.get('expiration_date')?.invalid &&
+        (taskForm.get('expiration_date')?.dirty ||
+          taskForm.get('expiration_date')?.touched)
+      "
+      class="p-error"
+    >
+      La fecha de vencimiento es requerida.
+    </small>
+  </div>
+
+  <div class="p-field mt-4">
+    <span class="p-float-label">
+      <p-dropdown
+        class="dropdown-filter"
+        formControlName="user_id"
+        [options]="userOptions"
+        optionLabel="label"
+        placeholder="Seleccione un usuario"
+        appendTo="body"
+      >
+      </p-dropdown>
+      <label for="user_id">Usuarios</label>
+    </span>
+    <small
+      *ngIf="
+        taskForm.get('user_id')?.invalid &&
+        (taskForm.get('user_id')?.dirty || taskForm.get('user_id')?.touched)
+      "
+      class="p-error"
+    >
+      Debe seleccionar un usuario.
+    </small>
+  </div>
+  <div class="p-d-flex p-jc-between p-ai-center mt-4">
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Cancelar"
+      class="p-button-danger mb-2"
+      (click)="onCancel()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Guardar"
+      class="p-button-primary"
+      [disabled]="taskForm.invalid"
+      (click)="onSubmit()"
+    ></button>
+  </div>
+</form>

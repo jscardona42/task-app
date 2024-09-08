@@ -1,1 +1,161 @@
-<p>task works!</p>
+<p-menubar [model]="items">
+  <ng-template pTemplate="start"> </ng-template>
+</p-menubar>
+
+<div class="grid justify-content-center mt-4">
+  <p-card class="col-10">
+    <p-table
+      #dtTasks
+      dataKey="id"
+      [value]="tasks"
+      [paginator]="true"
+      [rows]="10"
+      [first]="first"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      [totalRecords]="totalRecords"
+      [lazy]="true"
+      (onLazyLoad)="loadTasks($event)"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th scope="" style="width: 15%">Título</th>
+          <th scope="" style="width: 15%">Descripción</th>
+          <th scope="" style="width: 15%">Completada</th>
+          <th scope="" style="width: 15%">Fecha de expiración</th>
+          <th
+            *ngIf="user.role_name === 'ADMINISTRATOR'"
+            scope=""
+            style="width: 15%"
+          >
+            Usuario
+          </th>
+          <th *appPermissions="'CHECK'" scope="" style="width: 15%">
+            Completada
+          </th>
+          <th scope="" style="width: 15%">
+            <div class="flex justify-content">
+              <p-button
+                class="table-button"
+                *appPermissions="'CREATE'"
+                (onClick)="createNewTask()"
+                label="Nuevo"
+                icon="pi pi-plus"
+                severity="info"
+                iconPos="right"
+              ></p-button>
+            </div>
+          </th>
+        </tr>
+        <tr>
+          <th scope="">
+            <input
+              pInputText
+              class="input-filter"
+              type="text"
+              placeholder=""
+              [formControl]="filterForm.get('title')"
+            />
+          </th>
+          <th scope="">
+            <input
+              pInputText
+              class="input-filter"
+              type="text"
+              placeholder=""
+              [formControl]="filterForm.get('description')"
+            />
+          </th>
+          <th scope="col">
+            <p-columnFilter
+              field="completed"
+              matchMode="equals"
+              [showMenu]="false"
+            >
+              <ng-template
+                pTemplate="filter"
+                let-value
+                let-filter="filterCallback"
+              >
+                <p-dropdown
+                  class="dropdown-filter"
+                  [options]="taskStatus"
+                  [autoDisplayFirst]="false"
+                  [formControl]="filterForm.get('completed')"
+                  [multiple]="true"
+                  placeholder="Seleccione"
+                  appendTo="body"
+                >
+                </p-dropdown>
+              </ng-template>
+            </p-columnFilter>
+          </th>
+          <th scope=""></th>
+          <th *ngIf="user.role_name === 'ADMINISTRATOR'" scope="">
+            <input
+              pInputText
+              class="input-filter"
+              type="text"
+              placeholder=""
+              [formControl]="filterForm.get('user_name')"
+            />
+          </th>
+          <th *appPermissions="'CHECK'" scope=""></th>
+          <th scope=""></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-task>
+        <tr>
+          <td>{{ task.title }}</td>
+          <td>{{ task.description }}</td>
+          <td>{{ getStatusLabel(task.completed) }}</td>
+          <td>{{ task.expiration_date }}</td>
+          <td *ngIf="user.role_name === 'ADMINISTRATOR'">
+            {{ task.user_name }}
+          </td>
+          <td *appPermissions="'CHECK'">
+            <p-button
+              *ngIf="!task.completed"
+              icon="pi pi-check"
+              (click)="showConfirmCompleted(task)"
+              styleClass="p-button-warning mr-2"
+              pTooltip="Marcar como completada"
+              tooltipPosition="top"
+            ></p-button>
+
+            <i
+              *ngIf="task.completed"
+              class="pi pi-check p-icon-success mr-2"
+            ></i>
+          </td>
+          <td>
+            <ng-container *ngIf="!task.completed">
+              <p-button
+                *appPermissions="'UPDATE'"
+                icon="pi pi-pencil"
+                (click)="editTask(task)"
+                styleClass="p-button-primary mr-2"
+                tabindex="0"
+              ></p-button>
+              <p-button
+                *appPermissions="'DELETE'"
+                icon="pi pi-trash"
+                (click)="showConfirm(task.id)"
+                styleClass="p-button-danger"
+                tabindex="0"
+              ></p-button>
+            </ng-container>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+</div>
+<p-confirmDialog
+  header="Confirmación"
+  icon="pi pi-exclamation-triangle"
+  acceptLabel="Sí"
+  rejectLabel="No"
+></p-confirmDialog>
+<p-toast></p-toast>
