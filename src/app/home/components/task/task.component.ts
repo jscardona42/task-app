@@ -131,6 +131,7 @@ export class TaskComponent implements OnInit {
           summary: 'Success',
           detail: 'Tarea eliminada correctamente.'
         });
+        this.getTasks(); 
       },
       error: () => {
         this.messageService.add({
@@ -215,6 +216,7 @@ export class TaskComponent implements OnInit {
           summary: 'Success',
           detail: 'Se cambió el estado correctamente'
         });
+        this.getTasks(); 
       },
       error: () => {
         this.messageService.add({
