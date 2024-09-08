@@ -10,7 +10,7 @@
 
 1. Clona el repositorio (si aún no lo has hecho):
    ```
-   git clone git clone https://github.com/jscardona42/task-app.git
+   git clone https://github.com/jscardona42/task-app.git
    ```
 
 2. Navega al directorio del proyecto frontend:
